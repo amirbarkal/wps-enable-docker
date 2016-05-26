@@ -30,7 +30,7 @@
 7. Start the container:
 
    `docker run -dit wps`
-8. Access your shiny new portal instance from http://DOCKER_HOST:10039/wps/portal
+8. Access your shiny new portal instance from `http://DOCKER_HOST:10039/wps/portal`
 
 
 ## Legal Stuff:
