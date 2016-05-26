@@ -1,4 +1,4 @@
-FROM portal-add-tar
+FROM part4
 
 MAINTAINER Amir Barkal <amirb@webtech-inv.co.il>
 

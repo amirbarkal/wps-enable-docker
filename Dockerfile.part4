@@ -3,3 +3,11 @@ FROM ubuntu:15.10
 MAINTAINER Amir Barkal <amirb@webtech-inv.co.il>
 
 ADD portal.tar /
+
+COPY startPortal.sh /work/
+
+ENV PATH /opt/IBM/WebSphere/wp_profile/bin:$PATH
+
+EXPOSE 10200 10038 10039 10041 10042 10032 10022 10013 10014 10015 10028 10020
+
+CMD ["/work/startPortal.sh"]

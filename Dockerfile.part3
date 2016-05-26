@@ -1,4 +1,4 @@
-FROM nd
+FROM part2
 
 MAINTAINER Amir Barkal <amirb@webtech-inv.co.il>
 
