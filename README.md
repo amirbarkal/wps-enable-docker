@@ -13,16 +13,22 @@
 
    `docker build -t part1 --build-arg=URL=http://www.sources.com -f Dockerfile.part1 .`
 2. Export only what we need to run WAS and keep image size to a minimum:
+
    `docker run -v ${pwd}:/tmp -it part1`
 3. Create a clean WAS image from TAR file: 
+
    `docker build -t part2 -f Dockerfile.part2 .`
 4. Install WebSphere Portal into another image:
+
    `docker build -t part3 --build-arg=URL=http://www.sources.com --build-arg=HOST_NAME=portal1 -f Dockerfile.part3 .`
 5. Export only what we need to run WPS and keep image size to a minimum: (Again..)
+
    `docker run -v ${pwd}:/tmp -it part3 .`
 6. Build the final image:
+
    `docker build -t wps -f Dockerfile.part4 .`
 7. Start the container:
+
    `docker run -dit wps`
 8. Access your shiny new portal instance from http://DOCKER_HOST:10039/wps/portal
 
