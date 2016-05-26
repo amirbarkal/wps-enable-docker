@@ -10,6 +10,7 @@
 ## How does it work?
 
 1. Build WebSphere Application Server ND image:
+
    `docker build -t part1 --build-arg=URL=http://www.sources.com -f Dockerfile.part1 .`
 2. Export only what we need to run WAS and keep image size to a minimum:
    `docker run -v ${pwd}:/tmp -it part1`
