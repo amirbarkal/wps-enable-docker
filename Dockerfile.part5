@@ -1,0 +1,11 @@
+FROM portal-add-tar
+
+MAINTAINER Amir Barkal <amirb@webtech-inv.co.il>
+
+EXPOSE 10200 10039 10042 10032 10022
+
+COPY startPortal.sh /work/
+
+ENV PATH /opt/IBM/WebSphere/wp_profile/bin:$PATH
+
+CMD ["/work/startPortal.sh"]

@@ -1,0 +1,7 @@
+FROM ubuntu:15.10
+
+MAINTAINER Amir Barkal <amirb@webtech-inv.co.il>
+
+RUN mkdir /work
+
+ADD was.tar /

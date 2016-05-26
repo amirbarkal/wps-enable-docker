@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agent-input>
+    <server>
+        <repository location='/tmp/portal/WP85_Server/repository.config'/>
+        <repository location='/tmp/portal/WP85_Enable/repository.config'/>
+    </server>
+	<install modify='false'>
+        <offering id='com.ibm.websphere.PORTAL.SERVER.v85' profile='IBM WebSphere Portal Server V8.5' features='portal.binary,ce.install,portal.profile' installFixes='none'/>
+        <offering id='com.ibm.websphere.PORTAL.ENABLE.v85' profile='IBM WebSphere Portal Server V8.5' features='enable.upsell' installFixes='none'/>
+	</install>
+    <profile id='IBM WebSphere Application Server V8.5' installLocation='/opt/IBM/WebSphere/AppServer'>
+        <data key='eclipseLocation' value='/opt/IBM/WebSphere/AppServer'/>
+		<data key='user.import.profile' value='false'/>
+        <data key='cic.selector.nl' value='en, fr, it, zh, ro, ru, zh_TW, de, ja, pl, es, cs, hu, ko, pt_BR'/>
+	</profile>
+	<profile id='IBM WebSphere Portal Server V8.5' installLocation='/opt/IBM/WebSphere/PortalServer'>
+        <data key='eclipseLocation' value='/opt/IBM/WebSphere/PortalServer'/>
+        <data key='user.was.installLocation,com.ibm.websphere.PORTAL.SERVER.v85' value='/opt/IBM/WebSphere/AppServer'/>
+        <data key='user.configengine.binaryLocation,com.ibm.websphere.PORTAL.SERVER.v85' value='/opt/IBM/WebSphere/ConfigEngine'/>
+        <data key='user.wp.wasprofiles.location,com.ibm.websphere.PORTAL.SERVER.v85' value='/opt/IBM/WebSphere/AppServer/profiles'/>
+        <data key='user.cw.userid,com.ibm.websphere.PORTAL.SERVER.v85' value='wpsadmin'/>
+        <data key='user.cw.password,com.ibm.websphere.PORTAL.SERVER.v85' value='4taxKp1Gj5q5aCi+LjSKHQ=='/>
+        <data key='user.wp.base.offering,com.ibm.websphere.PORTAL.SERVER.v85' value='portal.server'/>
+        <data key='user.iim.currentlocale,com.ibm.websphere.PORTAL.SERVER.v85' value='en'/>
+        <data key='cic.selector.nl' value='en'/>
+        <data key='user.import.profile' value='false'/>
+        <data key='user.wp.hostname,com.ibm.websphere.PORTAL.SERVER.v85' value='portal1'/>
+        <data key='user.wp.cellname,com.ibm.websphere.PORTAL.SERVER.v85' value='portal1Cell'/>
+        <data key='user.wp.nodename,com.ibm.websphere.PORTAL.SERVER.v85' value='portal1Node'/>
+        <data key='user.wp.userid,com.ibm.websphere.PORTAL.SERVER.v85' value='wpsadmin'/>
+        <data key='user.wp.password,com.ibm.websphere.PORTAL.SERVER.v85' value='4taxKp1Gj5q5aCi+LjSKHQ=='/>
+        <data key='user.wp.custom.contextroot,com.ibm.websphere.PORTAL.SERVER.v85' value='wps'/>
+        <data key='user.wp.custom.defaulthome,com.ibm.websphere.PORTAL.SERVER.v85' value='portal'/>
+        <data key='user.wp.custom.personalhome,com.ibm.websphere.PORTAL.SERVER.v85' value='myportal'/>
+        <data key='user.wp.starting.port,com.ibm.websphere.PORTAL.SERVER.v85' value='10012'/>
+        <data key='user.wp.profilename,com.ibm.websphere.PORTAL.SERVER.v85' value='wp_profile'/>
+        <data key='user.wp.profilepath,com.ibm.websphere.PORTAL.SERVER.v85' value='/opt/IBM/WebSphere/wp_profile'/>
+	</profile>
+    <preference name='com.ibm.cic.common.core.preferences.eclipseCache' value='/opt/IBM/IMShared'/>
+    <preference name='com.ibm.cic.common.core.preferences.connectTimeout' value='30'/>
+    <preference name='com.ibm.cic.common.core.preferences.readTimeout' value='45'/>
+    <preference name='com.ibm.cic.common.core.preferences.downloadAutoRetryCount' value='0'/>
+    <preference name='offering.service.repositories.areUsed' value='false'/>
+    <preference name='com.ibm.cic.common.core.preferences.ssl.nonsecureMode' value='false'/>
+    <preference name='com.ibm.cic.common.core.preferences.http.disablePreemptiveAuthentication' value='false'/>
+    <preference name='http.ntlm.auth.kind' value='NTLM'/>
+    <preference name='http.ntlm.auth.enableIntegrated.win32' value='true'/>
+    <preference name='com.ibm.cic.common.core.preferences.preserveDownloadedArtifacts' value='false'/>
+    <preference name='com.ibm.cic.common.core.preferences.keepFetchedFiles' value='false'/>
+    <preference name='PassportAdvantageIsEnabled' value='false'/>
+    <preference name='com.ibm.cic.common.core.preferences.searchForUpdates' value='false'/>
+    <preference name='com.ibm.cic.agent.ui.displayInternalVersion' value='false'/>
+    <preference name='com.ibm.cic.common.sharedUI.showErrorLog' value='true'/>
+    <preference name='com.ibm.cic.common.sharedUI.showWarningLog' value='true'/>
+    <preference name='com.ibm.cic.common.sharedUI.showNoteLog' value='true'/>
+</agent-input>

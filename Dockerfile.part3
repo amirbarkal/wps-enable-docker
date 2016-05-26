@@ -1,0 +1,71 @@
+FROM nd
+
+MAINTAINER Amir Barkal <amirb@webtech-inv.co.il>
+
+RUN apt-get update && apt-get install -y \
+    unzip \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+ARG HOST_NAME
+
+ARG URL
+
+# Install IBM WebSphere Portal 8.5
+COPY portal_response.xml portal_cf_response.xml /tmp/
+
+RUN wget -q $URL/WSP_Enable_8.5_Setup.zip -O /tmp/wcm.zip \
+    && wget -q $URL/WSP_Server_8.5_Install.zip -O /tmp/server.zip \
+    && wget -q $URL/WSP_Enable_8.5_Install.zip -O /tmp/wcm_install.zip \
+    && mkdir /tmp/portal \
+    && unzip -qd /tmp/portal /tmp/wcm.zip \
+    && unzip -qd /tmp/portal /tmp/server.zip \
+    && unzip -qd /tmp/portal /tmp/wcm_install.zip \
+# Set hostname in /etc/hosts
+    && echo $(tail -1 /etc/hosts | cut -f1) $HOST_NAME >> /etc/hosts \
+# Execute IIM
+    && /opt/IBM/InstallationManager/eclipse/tools/imcl input /tmp/portal_response.xml \
+      -showProgress \
+      -acceptLicense \
+# Stop JVMs
+    && /opt/IBM/WebSphere/wp_profile/bin/stopServer.sh WebSphere_Portal \
+       -username wpsadmin \
+       -password wpsadmin \
+    && /opt/IBM/WebSphere/AppServer/profiles/cw_profile/bin/stopServer.sh server1 \
+       -username wpsadmin \
+       -password wpsadmin \
+# Install IBM WebSphere Portal 8.5 CF10
+    && wget -q $URL/8.5-WP-WCM-Combined-CFPI55632-Server-CF10.zip -O /tmp/portal_cf.zip \
+    && mkdir /tmp/portal_cf \
+    && unzip -qd /tmp/portal_cf /tmp/portal_cf.zip \
+    && unzip -qd /tmp/portal_cf /tmp/portal_cf/WP8500CF10_Server.zip \
+    && /opt/IBM/InstallationManager/eclipse/tools/imcl input /tmp/portal_cf_response.xml \
+       -showProgress \
+       -acceptLicense \
+    && rm -fr /tmp/portal_cf* \
+    && rm -fr /tmp/portal* \
+    && rm -fr /tmp/wcm.zip /tmp/server.zip \
+    && rm -fr /opt/IBM/WebSphere/wp_profile/wstemp/* \
+    && rm -fr /opt/IBM/WebSphere/wp_profile/temp/* \
+    && rm -fr /opt/IBM/WebSphere/wp_profile/logs/* \
+    && rm -fr /opt/IBM/WebSphere/wp_profile/tranlog/* \
+    && rm -fr /opt/IBM/WebSphere/AppServer/profiles/cw_profile/wstemp/* \
+    && rm -fr /opt/IBM/WebSphere/AppServer/profiles/cw_profile/temp/* \
+    && rm -fr /opt/IBM/WebSphere/AppServer/profiles/cw_profile/logs/* \
+    && rm -fr /opt/IBM/WebSphere/AppServer/profiles/cw_profile/tranlog/*
+
+# Apply CF
+RUN echo $(tail -1 /etc/hosts | cut -f1) $HOST_NAME >> /etc/hosts \
+    && /opt/IBM/WebSphere/wp_profile/PortalServer/bin/applyCF.sh \
+       -DPortalAdminPwd=wpsadmin \
+       -DWasPassword=wpsadmin \
+    && rm -fr /opt/IBM/WebSphere/wp_profile/wstemp/* \
+    && rm -fr /opt/IBM/WebSphere/wp_profile/temp/* \
+    && rm -fr /opt/IBM/WebSphere/wp_profile/logs/* \
+    && rm -fr /opt/IBM/WebSphere/wp_profile/tranlog/* \
+    && rm -fr /opt/IBM/WebSphere/AppServer/profiles/cw_profile/wstemp/* \
+    && rm -fr /opt/IBM/WebSphere/AppServer/profiles/cw_profile/temp/* \
+    && rm -fr /opt/IBM/WebSphere/AppServer/profiles/cw_profile/logs/* \
+    && rm -fr /opt/IBM/WebSphere/AppServer/profiles/cw_profile/tranlog/*
+
+CMD ["tar","cvf","/tmp/portal.tar","/opt/IBM/WebSphere"]
