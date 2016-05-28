@@ -8,7 +8,7 @@
    Inspired by [WASdev GitHub](https://github.com/WASdev/ci.docker.websphere-traditional)
 
 ## How does it work?
-You build the image in steps to reduce final image size. Make sure you put all source files somewhere that's accisible via http:
+You build the image in steps to reduce final image size. Make sure you put all source files somewhere that's accesible via http:
 
 1. Build WebSphere Application Server ND image:
 
