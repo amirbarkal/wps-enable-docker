@@ -30,7 +30,7 @@ You build the image in steps to reduce final image size. Make sure you put all s
    `docker build -t wps -f Dockerfile.part4 .`
 7. Start the container:
 
-   `docker run -dit wps`
+   `docker run -h portal1 -dit wps`
 8. Access your shiny new portal instance from `http://DOCKER_HOST:10039/wps/portal`
 
 
